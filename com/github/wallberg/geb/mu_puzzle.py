@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import unittest
 import re
 
 from ordered_set import OrderedSet
@@ -22,25 +23,29 @@ def add(s, t):
         print(f'{s} -> {t}')
 
 
-# Iterate over each theorem in the system
-for s in system:
+def main():
+    # Iterate over each theorem in the system
+    for s in system:
 
-    # Rule I: xI -> xIU
-    if s.endswith('I'):
-        add(s, s + 'U')
+        # Rule I: xI -> xIU
+        if s.endswith('I'):
+            add(s, s + 'U')
 
-    # Rule II: Mx -> Mxx
-    if s.startswith('M'):
-        x = s[1:]
-        add(s, 'M' + x + x)
+        # Rule II: Mx -> Mxx
+        if s.startswith('M'):
+            x = s[1:]
+            add(s, 'M' + x + x)
 
-    # Rule III: xIIIy -> xUy
-    for m in re.finditer('III', s):
-        add(s, s[:m.start()] + 'U' + s[m.end():])
+        # Rule III: xIIIy -> xUy
+        for m in re.finditer('III', s):
+            add(s, s[:m.start()] + 'U' + s[m.end():])
 
-    # Rule IV: xUUy -> xy
-    for m in re.finditer('UU', s):
-        add(s, s[:m.start()] + s[m.end():])
+        # Rule IV: xUUy -> xy
+        for m in re.finditer('UU', s):
+            add(s, s[:m.start()] + s[m.end():])
 
-    if all(s in system for s in ['MUIIU']):
-        break
+        if all(s in system for s in ['MUIIU']):
+            break
+
+if __name__ == '__main__':
+    unittest.main(exit=False)

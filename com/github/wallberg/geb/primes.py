@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import unittest
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -55,47 +56,51 @@ def axiom_schema():
             yield DND(x, y)
         x += 1
 
+def main():
+    # Axioms
+    print(P(2))
 
-# Axioms
-print(P(2))
-
-asc = axiom_schema()
-
-# Add next Axiom from Schema
-add(next(asc))
-
-# Iterate over the queue
-while item := q.get():
-
-    s = item.data
-
-    if s not in theorems:
-        theorems.add(s)
-
-        # Rules
-        if isinstance(s, DND):
-
-            # Rule: xDNDy --> xDNDxy
-            add(DND(s.x, s.x+s.y), s)
-
-            # Rule: --DNDz --> zDF--
-            if s.x == 2:
-                add(DF(s.y, 2), s)
-
-            # Rule: zDFx and x-DNDz --> zDFx-
-            if (u := DF(s.y, s.x-1)) in theorems:
-                add(DF(s.y, s.x), u, s)
-
-        elif isinstance(s, DF):
-
-            # Rule: zDFx and x-DNDz --> zDFx-
-            if (u := DND(s.y+1, s.x)) in theorems:
-                add(DF(s.x, s.y+1), s, u)
-
-            # Rule: x-DFx --> Px-
-            if s.x == s.y+1:
-                p = P(s.x)
-                print(p)
+    asc = axiom_schema()
 
     # Add next Axiom from Schema
     add(next(asc))
+
+    # Iterate over the queue
+    while item := q.get():
+
+        s = item.data
+
+        if s not in theorems:
+            theorems.add(s)
+
+            # Rules
+            if isinstance(s, DND):
+
+                # Rule: xDNDy --> xDNDxy
+                add(DND(s.x, s.x+s.y), s)
+
+                # Rule: --DNDz --> zDF--
+                if s.x == 2:
+                    add(DF(s.y, 2), s)
+
+                # Rule: zDFx and x-DNDz --> zDFx-
+                if (u := DF(s.y, s.x-1)) in theorems:
+                    add(DF(s.y, s.x), u, s)
+
+            elif isinstance(s, DF):
+
+                # Rule: zDFx and x-DNDz --> zDFx-
+                if (u := DND(s.y+1, s.x)) in theorems:
+                    add(DF(s.x, s.y+1), s, u)
+
+                # Rule: x-DFx --> Px-
+                if s.x == s.y+1:
+                    p = P(s.x)
+                    print(p)
+
+        # Add next Axiom from Schema
+        add(next(asc))
+
+
+if __name__ == '__main__':
+    unittest.main(exit=False)
