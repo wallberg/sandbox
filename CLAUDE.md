@@ -38,9 +38,6 @@ uv run python -m unittest com.github.wallberg.taocp.Backtrack.Test.test_n_queens
 There is no separate lint/format command wired up; `pycodestyle` is a listed dependency for manual style checks
 (`uv run pycodestyle <path>`).
 
-Ignore the root `Makefile` — it is a stale leftover from an earlier Go-based iteration of this repo (`go build`,
-`GOPACKAGES`, `.env`) and does not apply to the current Python codebase.
-
 ## Architecture
 
 ### Package layout
