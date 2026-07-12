@@ -11,16 +11,27 @@ Set up the local Python environment:
 git clone git@github.com:wallberg/sandbox.git
 cd sandbox
 
-# Setup the Python version
-pyenv install --skip-existing $(cat .python-version)
+# Install uv (one-time, if not already installed)
+# macOS:
+brew install uv
+# Linux / CI / non-Homebrew:
+# curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Setup the virtual environment
-python -m venv .venv --prompt "$(basename "$PWD")-py$(cat .python-version)"
+# Set up virtual environment and install dependencies
+# (uv auto-installs Python 3.11 if not already present)
+uv sync
+
+# Activate (optional — scripts in ./run and ./runtests use uv run automatically)
 source .venv/bin/activate
-
-# Install the requirements and setup any script entry points
-pip install -r requirements.txt
 ```
+
+Common uv commands:
+
+| Task | Command |
+|------|---------|
+| Install/update all deps | `uv sync` |
+| Add a new package | `uv add <pkg>` |
+| Run a script | `uv run python script.py` |
 
 ## Extras
 

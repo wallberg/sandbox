@@ -1,5 +1,5 @@
 #!/bin/bash
 
-HOME_DIR=/Users/wallberg/git/sandbox
+HOME_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 ${HOME_DIR}/run ${HOME_DIR}/runtests.py --directory=${HOME_DIR} "$@"
