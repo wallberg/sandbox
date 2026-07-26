@@ -1,0 +1,34 @@
+version: '3'
+
+tasks:
+  sync:
+    desc: Create .venv and install dependencies
+    cmds:
+      - uv sync
+
+  run:
+    desc: Run a script (task run -- <script.py> [args])
+    cmds:
+      - ./run {{.CLI_ARGS}}
+
+  test:
+    desc: Run the fast test suite (excludes test_long_* methods)
+    cmds:
+      - ./runtests {{.CLI_ARGS}}
+
+  test:long:
+    desc: Run the full test suite, including slow test_long_* methods
+    cmds:
+      - ./runtests -l {{.CLI_ARGS}}
+
+  test:one:
+    desc: Run a single test by dotted path (task test:one -- com.github.wallberg.taocp.Backtrack.Test.test_n_queens)
+    cmds:
+      - uv run python -m unittest {{.CLI_ARGS}}
+
+  lint:
+    desc: Check style with pycodestyle (task lint -- <path>, defaults to whole repo)
+    vars:
+      TARGET: '{{.CLI_ARGS | default "com"}}'
+    cmds:
+      - uv run pycodestyle {{.TARGET}}
