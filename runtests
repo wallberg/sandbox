@@ -2,4 +2,4 @@
 
 HOME_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-${HOME_DIR}/run ${HOME_DIR}/runtests.py --directory=${HOME_DIR} "$@"
+${HOME_DIR}/run -m sandbox.runtests --directory=${HOME_DIR}/src "$@"

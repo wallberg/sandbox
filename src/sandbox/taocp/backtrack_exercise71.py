@@ -2,7 +2,7 @@
 import unittest
 import logging
 
-from com.github.wallberg.taocp.Backtrack import basic_backtrack
+from sandbox.taocp.Backtrack import basic_backtrack
 
 '''
 Explore Backtrack Programming from The Art of Computer Programming, Volume 4,
@@ -12,7 +12,7 @@ Dancing Links, 2020
 §7.2.2 Backtrack Programming
 '''
 
-logger = logging.getLogger('com.github.wallberg.taocp.backtrack_exercise71')
+logger = logging.getLogger('sandbox.taocp.backtrack_exercise71')
 
 
 def exercise_71_warmup(x, stats=None):

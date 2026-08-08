@@ -6,10 +6,10 @@ from array import array
 from copy import copy
 import logging
 
-from com.github.wallberg.taocp.Backtrack import walkers_backtrack
-from com.github.wallberg.taocp.Tuples import preprimes
+from sandbox.taocp.Backtrack import walkers_backtrack
+from sandbox.taocp.Tuples import preprimes
 
-logger = logging.getLogger('com.github.wallberg.taocp.Commafree')
+logger = logging.getLogger('sandbox.taocp.Commafree')
 #ger logger.addHandler(logging.StreamHandler())
 # log.setLevel(logging.INFO)
 

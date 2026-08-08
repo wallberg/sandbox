@@ -2,7 +2,7 @@
 import unittest
 from itertools import islice
 
-from com.github.wallberg.taocp.Trie import WordTrie, PrefixTrie
+from sandbox.taocp.Trie import WordTrie, PrefixTrie
 
 '''
 Explore Backtrack Programming from The Art of Computer Programming, Volume 4,

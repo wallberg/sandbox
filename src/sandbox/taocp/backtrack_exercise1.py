@@ -2,7 +2,7 @@
 import unittest
 from itertools import islice
 
-from com.github.wallberg.taocp.Backtrack import basic_backtrack
+from sandbox.taocp.Backtrack import basic_backtrack
 
 '''
 Explore Backtrack Programming from The Art of Computer Programming, Volume 4,

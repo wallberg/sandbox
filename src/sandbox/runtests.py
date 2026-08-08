@@ -127,7 +127,7 @@ def run_test_chunk(tests, verbosity):
     )
 
 
-if __name__ == '__main__':
+def main():
     # Get command line arguments
     parser = argparse.ArgumentParser()
 
@@ -209,3 +209,7 @@ if __name__ == '__main__':
                                             verbosity=args.verbosity)
 
         test_runner.run(test_suite)
+
+
+if __name__ == '__main__':
+    main()

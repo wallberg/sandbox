@@ -22,13 +22,13 @@ tasks:
       - ./runtests -l {{.CLI_ARGS}}
 
   test:one:
-    desc: Run a single test by dotted path (task test:one -- com.github.wallberg.taocp.Backtrack.Test.test_n_queens)
+    desc: Run a single test by dotted path (task test:one -- sandbox.taocp.Backtrack.Test.test_n_queens)
     cmds:
       - uv run python -m unittest {{.CLI_ARGS}}
 
   lint:
     desc: Check style with pycodestyle (task lint -- <path>, defaults to whole repo)
     vars:
-      TARGET: '{{.CLI_ARGS | default "com"}}'
+      TARGET: '{{.CLI_ARGS | default "src"}}'
     cmds:
       - uv run pycodestyle {{.TARGET}}

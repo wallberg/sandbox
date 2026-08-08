@@ -6,7 +6,7 @@ import argparse
 
 import networkx as nx
 
-from com.github.wallberg.taocp.Backtrack import walkers_backtrack
+from sandbox.taocp.Backtrack import walkers_backtrack
 
 """
 Explore Word Stair Kernels from The Art of Computer Programming, Volume 4,
@@ -16,7 +16,7 @@ Dancing Links, 2020
 §7.2.2.1 Dancing Links, Exercise 91
 """
 
-logger = logging.getLogger('com.github.wallberg.taocp.word_stair_kernels')
+logger = logging.getLogger('sandbox.taocp.word_stair_kernels')
 
 
 def exercise_91(args):

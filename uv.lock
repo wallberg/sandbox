@@ -329,7 +329,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/37/8b/5f1bc2734ca611943
 [[package]]
 name = "sandbox"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "bitarray" },
     { name = "gmpy2" },

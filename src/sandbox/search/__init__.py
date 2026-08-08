@@ -7,7 +7,7 @@ from sortedcontainers import SortedList
 
 # Search
 
-logger = logging.getLogger('com.github.wallberg.search')
+logger = logging.getLogger('sandbox.search')
 
 
 class Node():

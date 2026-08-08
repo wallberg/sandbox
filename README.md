@@ -35,6 +35,12 @@ Common uv commands:
 
 ## Extras
 
-Project Euler code is tracked in a separate private repo, but can be included here:
+Project Euler code is tracked in a separate private repo. It depends on this project as a local
+`uv` path dependency, so clone it as a sibling directory next to this one:
 
-` git clone git@github.com:wallberg/project-euler.git com/github/wallberg/euler `
+```bash
+cd ..
+git clone git@github.com:wallberg/project-euler.git euler
+cd euler
+uv sync
+```

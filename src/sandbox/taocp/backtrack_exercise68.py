@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from com.github.wallberg.taocp.Backtrack import walkers_backtrack
+from sandbox.taocp.Backtrack import walkers_backtrack
 
 '''
 Explore Backtrack Programming from The Art of Computer Programming, Volume 4,

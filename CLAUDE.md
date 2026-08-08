@@ -12,27 +12,29 @@ self-contained exploration, runnable and testable on its own.
 ## Setup
 
 ```bash
-uv sync                        # create .venv and install deps (auto-installs Python 3.11 if needed)
+uv sync                        # create .venv and install deps (auto-installs the Python version pinned in .python-version)
 ```
 
 ## Common commands
 
 ```bash
 ./run <script.py> [args]       # uv run python <script.py> — run any module directly
-./runtests [options]           # discover and run all inline unittest suites under the repo root
+./runtests [options]           # discover and run all inline unittest suites under src/
 ```
 
-`runtests` wraps `runtests.py` (custom `unittest` runner with per-test timing). Useful flags:
+`runtests` wraps `src/sandbox/runtests.py` (custom `unittest` runner with per-test timing, also exposed as the
+`sandbox-runtests` console script so the euler sibling repo can invoke it via its own dependency on this package).
+Useful flags:
 
 - `-l`, `--longtests` — include slow tests (methods named `test_long_*`); excluded by default
 - `-p PATTERN`, `--pattern PATTERN` — glob of modules to discover (default `*.py`)
 - `-t SECONDS`, `--threshold SECONDS` — report tests slower than this as "slow" (default 5.0)
 - `-v {0,1,2}` — verbosity
 
-Run a single test directly with stdlib unittest (dotted path mirrors the directory path):
+Run a single test directly with stdlib unittest (dotted path mirrors the directory path under `src/`):
 
 ```bash
-uv run python -m unittest com.github.wallberg.taocp.Backtrack.Test.test_n_queens
+uv run python -m unittest sandbox.taocp.Backtrack.Test.test_n_queens
 ```
 
 There is no separate lint/format command wired up; `pycodestyle` is a listed dependency for manual style checks
@@ -42,9 +44,8 @@ There is no separate lint/format command wired up; `pycodestyle` is a listed dep
 
 ### Package layout
 
-Code lives under `com/github/wallberg/<topic>/`, a Java-style reverse-DNS namespace (mirroring the GitHub
-repo path) purely so modules can be imported as `com.github.wallberg.<topic>.<Module>`. Every directory needs an
-`__init__.py`. Topics:
+Code lives under `src/sandbox/<topic>/`, a standard `src`-layout package installed editable via `uv sync`, importable
+as `sandbox.<topic>.<Module>`. Every directory needs an `__init__.py`. Topics:
 
 - `geb/` — puzzles from *Gödel, Escher, Bach* (e.g. `primes.py` recursively enumerates primes via the MU-puzzle-style
   formal system from Chapter 3; `mu_puzzle.py`).
@@ -53,10 +54,11 @@ repo path) purely so modules can be imported as `com.github.wallberg.<topic>.<Mo
   (`Backtrack.py`, `DancingLinks.py`, `Trie.py`, `BooleanBasics.py`, `Commafree.py`, `Tuples.py`,
   `word_rectangles_exercise*.py`). `taocp.txt` at the repo root is the TAOCP table of contents kept for reference
   when cross-referencing section/exercise numbers used in comments and docstrings.
-- `euler/` — Project Euler solutions. This is a **separate private repo**, not part of this one; it's gitignored
-  here and only present locally if cloned per the README:
-  `git clone git@github.com:wallberg/project-euler.git com/github/wallberg/euler`. Don't expect it to exist or be
-  committable from this repo.
+
+Project Euler solutions live in a **separate private sibling repo** (`../euler`, cloned per the README), not part of
+this one. It depends on this project as a `uv` local path dependency (`sandbox` package, declared via
+`[tool.uv.sources]` pointing at `../sandbox`) rather than being nested inside this repo's tree, and imports it the
+same way any other consumer would (e.g. `from sandbox.search import Search`).
 
 Knuth algorithm implementations follow the book's own structure closely: functions are commented with the book's
 step labels (e.g. `# B1 [Initialize]`, `goto = 'B2'`) and implemented as explicit state-machine loops over those

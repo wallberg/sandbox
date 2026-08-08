@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from com.github.wallberg.taocp.Trie import WordTrie
+from sandbox.taocp.Trie import WordTrie
 
 '''
 The Art of Computer Programming, Volume 4A, Combinatorial Algorithms,

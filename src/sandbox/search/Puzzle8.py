@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from com.github.wallberg.search import Node, Problem, Search
+from sandbox.search import Node, Problem, Search
 
 # 8-Puzzle problem
 
